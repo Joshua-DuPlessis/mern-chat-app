@@ -1,7 +1,37 @@
 import React from 'react';
-import { Box, Stack, Typography, IconButton, InputBase, Divider, Button } from '@mui/material';
+import { Avatar, Box, Stack, Typography, IconButton, InputBase, Divider, Button, Badge } from '@mui/material';
 import { CircleDashed, MagnifyingGlass, ArchiveBox } from 'phosphor-react';
 import { styled, alpha } from '@mui/material/styles';
+import { faker } from "@faker-js/faker";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        backgroundColor: '#44b700',
+        color: '#44b700',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: 'ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
+    },
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
+    },
+}));
 
 const ChatElement = () => {
     return (
@@ -10,10 +40,41 @@ const ChatElement = () => {
                 width: '100%',
                 borderRadius: 1,
                 backgroundColor: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
             }}
-        ></Box>
+        >
+            <StyledBadge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+                sx={{ marginRight: '10px' }}
+            >
+                <Avatar src={faker.image.avatar()} />
+            </StyledBadge>
+            <Box>
+                <Stack spacing={0.3}>
+                    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
+                        <Typography variant="subtitle2" color="#000">
+                            Joshua
+                        </Typography>
+                        <Typography sx={{ fontWeight: 600 }} variant="caption" color="#000">
+                            9:36
+                        </Typography>
+                    </Stack>
+                    <Typography variant="caption" color="#000">
+                        How you
+                    </Typography>
+                </Stack>
+            </Box>
+            <Badge color="primary" badgeContent={2} sx={{ marginLeft: 'auto' }}>
+                <Typography variant="caption">2</Typography>
+            </Badge>
+        </Box>
     );
 };
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
