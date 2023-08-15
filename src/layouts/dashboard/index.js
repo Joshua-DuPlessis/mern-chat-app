@@ -16,6 +16,7 @@ import Logo from '../../assets/Images/logo.ico';
 import { faker } from '@faker-js/faker';
 import useSettings from '../../hooks/useSettings';
 
+
 // Styles for the AntSwitch
 const AntSwitch = styled(Switch)(({ theme }) => ({
     // AntSwitch styles...
@@ -31,6 +32,7 @@ const DashboardLayout = () => {
     };
 
     return (
+        <Stack direction="row">
         <Box display="flex">
             <Box width={100} p={2} boxShadow="0px 0px 2px rgba(0, 0, 0, 0.25)">
                 <Stack direction="column" alignItems="center" spacing={3}>
@@ -105,6 +107,7 @@ const DashboardLayout = () => {
                 <Outlet />
             </Box>
         </Box>
+            </Stack>
     );
 };
 
