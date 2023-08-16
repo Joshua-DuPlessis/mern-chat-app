@@ -1,9 +1,25 @@
 import React from 'react';
+import { CaretDown, VideoCamera, Phone } from 'phosphor-react'; // Added imports
 import { useTheme } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import SendIcon from '@mui/icons-material/Send';
 import { faker } from '@faker-js/faker';
-import { Stack, Box, Avatar, Badge, Typography, IconButton, Divider } from '@mui/material';
+import { Stack, Box, Avatar, Badge, Typography, IconButton, TextField, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { VideoCamera, Phone, MagnifyingGlass } from 'phosphor-react'; // Replace with actual icon imports
+import { MagnifyingGlass } from 'phosphor-react';
+
+const StyledInput = styled(TextField)(({ theme }) => ({
+    // Custom input styles...
+    "& .MuiInputBase-input" : {
+        paddingTop: "12px",
+        paddingBottom: "12px",
+
+
+    }
+}));
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
@@ -30,6 +46,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
+
 const ActionButtons = () => {
     return (
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -43,6 +60,7 @@ const ActionButtons = () => {
                 <MagnifyingGlass />
             </IconButton>
             <Divider orientation="vertical" flexItem />
+            <CaretDown />
         </Stack>
     );
 };
@@ -55,10 +73,10 @@ const Conversation = () => {
             {/* Chat Header */}
             <Box
                 sx={{
-                    height: 100,
                     width: '100%',
-                    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#333', // Light and Dark mode colors
-                    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)', // Subtle Box Shadow
+                    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#333',
+                    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+                    padding: '10px',
                 }}
             >
                 <Stack
@@ -67,7 +85,7 @@ const Conversation = () => {
                     justifyContent="space-between"
                     sx={{ width: '100%', height: '100%' }}
                 >
-                    {/* Elements inside the header */}
+                    {/* Header elements */}
                     <Stack direction="row" alignItems="center" spacing={2}>
                         <StyledBadge
                             overlap="circular"
@@ -94,8 +112,58 @@ const Conversation = () => {
             </Box>
 
             {/* Messages */}
-            <Box width="100%" sx={{ flexGrow: 1 }}>
-                {/* Messages component */}
+            <Box width="100%" sx={{ flexGrow: 1, overflowY: 'scroll', padding: '10px' }}>
+                {/* Sample Messages */}
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                    marginBottom="10px"
+                >
+                    <Avatar alt="User" src={faker.image.avatar()} sx={{ width: 32, height: 32, marginRight: '8px' }} />
+                    <Box
+                        backgroundColor={theme.palette.primary.main}
+                        color={theme.palette.primary.contrastText}
+                        borderRadius="8px"
+                        padding="8px 12px"
+                    >
+                        This is a message from the user.
+                    </Box>
+                </Box>
+                {/* Add more messages */}
+            </Box>
+
+            {/* Text Input */}
+
+            <Box
+                p={2}
+                sx={{
+                    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#333',
+                    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+                    padding: '10px',
+                }}
+            >
+                <StyledInput
+                    fullWidth
+                    variant="filled"
+                    placeholder="Type a message..."
+                    InputProps={{
+                        disableUnderline: true,
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <IconButton>
+                                    <AttachFileIcon /> {/* Attach File Icon */}
+                                </IconButton>
+                                <IconButton>
+                                    <EmojiEmotionsIcon /> {/* Emoji Icon */}
+                                </IconButton>
+                                <IconButton>
+                                    <SendIcon /> {/* Send Message Icon */}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </Box>
 
             {/* Chat Footer */}
@@ -103,8 +171,9 @@ const Conversation = () => {
                 sx={{
                     height: 100,
                     width: '100%',
-                    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#333', // Light and Dark mode colors
-                    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)', // Subtle Box Shadow
+                    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#333',
+                    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+                    padding: '10px',
                 }}
             >
                 {/* Footer content */}
@@ -114,3 +183,4 @@ const Conversation = () => {
 };
 
 export default Conversation;
+
